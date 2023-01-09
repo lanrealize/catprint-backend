@@ -20,6 +20,10 @@ async function main() {
     db.once('open', () => {console.log('Connected to database')})
 
     app.use(express.json())
+
+    const catsRouter = require('./routes/users')
+
+    app.use('/cats', catsRouter)
     
     app.listen(3000, () => console.log('listening on port 3000...'))
 }
