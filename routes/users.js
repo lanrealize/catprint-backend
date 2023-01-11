@@ -1,14 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const Cat = require('../models/user')
+const userCOntroller = require('../controllers/users')
 
-router.get('/', async (req, res) => {
-    try {
-        const cats = await Cat.find()
-        res.json(cats)
-    } catch (e) {
-        res.status(500).json({ message: e.message})
-    }
-})
+router.get('/', userCOntroller.getUserPicByID)
 
 module.exports = router
