@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const userCOntroller = require('../controllers/users.controller')
+const picturesRouter = require('./pictures.route')
+
+router.use('/:_id/pictures', picturesRouter)
 
 router.get('/', userCOntroller.getUsers)
 
