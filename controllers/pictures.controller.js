@@ -1,6 +1,7 @@
 const User = require('../models/users.model')
 const mongoose = require('mongoose')
 const getUserByID = require('./users.controller').getUserByID
+const uuid = require('uuid')
 
 async function getPictures(req, res) {
     res.json(res.user.pictures)
@@ -8,14 +9,16 @@ async function getPictures(req, res) {
 
 async function postPicture(req, res) {
 
+    console.log(res.user[0])
+
     try {
         res.user.pictures.push({
-            id: req.body.id,
+            id: uuid.v1(),
             url: req.body.url,
             timeStamp: req.body.timeStamp,
             description: req.body.description
         })
-
+        
         await res.user.save()
 
         res.status(201).json(res.user.pictures)

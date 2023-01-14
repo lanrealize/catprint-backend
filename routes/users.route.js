@@ -3,13 +3,13 @@ const router = express.Router()
 const userCOntroller = require('../controllers/users.controller')
 const picturesRouter = require('./pictures.route')
 
-router.use('/:_id/pictures', picturesRouter)
+router.use('/:openID/pictures', picturesRouter)
 
 router.get('/', userCOntroller.getUsers)
 
-router.get('/:_id', userCOntroller.getUserByID, userCOntroller.getUser)
+router.get('/:openID', userCOntroller.getUserByID, userCOntroller.getUser)
 
-router.delete('/:_id', userCOntroller.getUserByID, userCOntroller.deleteUser)
+router.delete('/:openID', userCOntroller.deleteUser)
 
 router.post('/', userCOntroller.createUser)
 
