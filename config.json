@@ -1,0 +1,24 @@
+{
+    "picBed": {
+      "uploader": "qiniu",
+      "current": "qiniu",
+      "transformer": "path",
+      "github": {
+        "repo": "lanrealize/images",
+        "branch": "main",
+        "token": "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",
+        "path": "",
+        "customUrl": ""
+      },
+      "qiniu": {
+        "accessKey": "FM1tFlwY0o_2l8-rHUdZ2CowB0oMfMnSAR6tQIQ5",
+        "secretKey": "0lAfUmiDE19Xusd3lHRV4wBta7sWcFV9Og4EQNAc",
+        "bucket": "catprint",
+        "url": "http://image.lifeprint.site",
+        "area": "z0",
+        "options": "",
+        "path": ""
+      }
+    },
+    "picgoPlugins": {}
+}
