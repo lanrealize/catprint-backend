@@ -1,3 +1,16 @@
-const uuid = require('uuid')
+const { PicGo } = require('picgo')
 
-console.log(uuid.v1())
+const picgo = new PicGo('./config.json')
+
+console.log(picgo.getConfig())
+
+console.log(picgo.configPath)
+
+
+
+async function main() {
+    const res = await picgo.upload(['./icon.png'])
+    console.log(res) 
+}
+
+main()
