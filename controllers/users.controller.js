@@ -1,4 +1,5 @@
 const User = require('../models/users.model')
+const request = require('request');
 
 
 async function getUsers(req, res) {
@@ -52,6 +53,16 @@ async function getUserByID(req, res, next) {
     next()
 }
 
+async function userLogin(req, res) {
+    console.log(req.body.code)
+    const url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + process.env.APP_ID + '&secret=' + process.env.APP_SECRET + '&js_code=' + req.body.code + '&grant_type=authorization_code'
+
+    request(url, (err, response, body) => {
+        const session = JSON.parse(body)
+        console.log(session)
+    })
+}
+
 
 module.exports = {
     getUsers: getUsers,
@@ -62,5 +73,7 @@ module.exports = {
 
     getUserByID: getUserByID,
 
-    createUser: createUser
+    createUser: createUser,
+
+    userLogin: userLogin
 }
