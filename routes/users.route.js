@@ -13,6 +13,4 @@ router.delete('/:openID', userCOntroller.deleteUser)
 
 router.post('/', userCOntroller.createUser)
 
-router.post('/login', userCOntroller.userLogin)
-
 module.exports = router
