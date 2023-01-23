@@ -1,5 +1,4 @@
 const User = require('../models/users.model')
-const request = require('request');
 
 
 async function getUsers(req, res) {
@@ -55,12 +54,8 @@ async function getUserByID(req, res, next) {
 
 module.exports = {
     getUsers: getUsers,
-
     getUser: getUser,
-
     deleteUser: deleteUser,
-
     getUserByID: getUserByID,
-
     createUser: createUser,
 }

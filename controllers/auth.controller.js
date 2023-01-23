@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
-const request = require('request');
+const request = require('request')
+const User = require('../models/users.model')
 
 
 function login(req, res) {
@@ -10,11 +11,28 @@ function login(req, res) {
 
     request(url, (err, response, body) => {
         const session = JSON.parse(body)
-        const user = { id: session.openID }
+        const wxUser = { id: session.openID }
+        console.log(wxUser)
+        const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
+        console.log(`cteated access token successfully`)
 
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-        res.json({accessToken: accessToken})
-        console.log(`granted access token successfully`)
+        User.findOne({openID: wxUser.id}).then((user) => {
+            if (user == null) {
+                try {
+                    console.log(wxUser)
+                    User.create({ openID: wxUser.id, pictures: [] })
+                    console.log(`cteated user successfully`)
+                    res.status(201).json({accessToken: accessToken})
+                    console.log(`granted access token successfully`)
+                } catch (e) {
+                    console.log(e.message)
+                    res.status(400).json({ message: e.message })
+                }
+            } else {
+                res.status(200).json({accessToken: accessToken})
+                console.log(`granted access token successfully`)
+            }
+        })
     })
 }
 
