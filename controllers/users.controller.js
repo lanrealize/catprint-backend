@@ -16,8 +16,8 @@ async function getUser(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        await User.deleteOne({openID: req.params.openID})
-        res.json({ message: `User with id: ${req.params.openID} deleted`})
+        await User.deleteOne({openID: req.wxUser.openID})
+        res.status(204).json({ message: `User with id: ${req.params.openID} deleted`})
     } catch(e) {
         res.status(500).json({ message: e.message })
     }
@@ -39,10 +39,11 @@ async function createUser(req, res) {
     }
 }
 
-async function getUserByID(req, res, next) {
+async function getUserByOpenID(req, res, next) {
     let user
     try {
-        user = await User.findOne({openID: req.params.openID})
+        user = await User.findOne({openID: req.wxUser.openID})
+        // TODO: automatically register should be implement here
         if (user == null) return res.status(404).json({ message: `User with id: ${req.params._id} not fount`})
     } catch (e) {
         res.status(500).json({ message: e.message })
@@ -56,6 +57,6 @@ module.exports = {
     getUsers: getUsers,
     getUser: getUser,
     deleteUser: deleteUser,
-    getUserByID: getUserByID,
+    getUserByOpenID: getUserByOpenID,
     createUser: createUser,
 }
