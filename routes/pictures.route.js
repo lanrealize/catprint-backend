@@ -5,12 +5,12 @@ const picturesController = require('../controllers/pictures.controller')
 
 const picturesRouter = express.Router({mergeParams: true});
 
-picturesRouter.get('/', userCOntroller.getUserByID, picturesController.getPictures)
+picturesRouter.get('/', userCOntroller.getUserByOpenID, picturesController.getPictures)
 
-picturesRouter.get('/:picID', userCOntroller.getUserByID, picturesController.getPicByID, picturesController.getPicture)
+picturesRouter.get('/:picID', userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.getPicture)
 
-picturesRouter.delete('/:picID', userCOntroller.getUserByID, picturesController.getPicByID, picturesController.deletePicture)
+picturesRouter.delete('/:picID', userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.deletePicture)
 
-picturesRouter.post('/', userCOntroller.getUserByID, picturesController.postPicture)
+picturesRouter.post('/', userCOntroller.getUserByOpenID, picturesController.postPicture)
 
 module.exports = picturesRouter
