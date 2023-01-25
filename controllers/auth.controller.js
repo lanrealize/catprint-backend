@@ -37,6 +37,7 @@ function login(req, res) {
 
 
 function authenticateToken(req, res, next) {
+    console.log('check access token')
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
@@ -44,6 +45,7 @@ function authenticateToken(req, res, next) {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (e, user) => {
         if (e) return res.sendStatus(403)
+        console.log('valid access token')
         req.wxUser = user
         next()
     })
