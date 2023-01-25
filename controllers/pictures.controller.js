@@ -9,19 +9,22 @@ async function getPictures(req, res) {
 
 async function postPicture(req, res) {
 
-    console.log(res.user[0])
-
     try {
-        res.user.pictures.push({
+
+        const pic = {
             id: uuid.v1(),
             url: req.body.url,
             timeStamp: req.body.timeStamp,
             description: req.body.description
-        })
+        }
+
+        res.user.pictures.push(pic)
         
         await res.user.save()
 
-        res.status(201).json(res.user.pictures)
+        console.log(`Created picture ${pic.id} successfully`)
+
+        res.status(201).json(pic)
     } catch (e) {
         res.status(500).json({ message: e.message })
     }
@@ -38,7 +41,7 @@ async function deletePicture(req, res) {
         const idx = res.user.pictures.indexOf(res.pic)
         res.user.pictures.splice(idx, 1);
         await res.user.save(res.pic)
-        res.status(200).json()
+        res.status(204).json()
     } catch (e) {
         res.status(500).json({ message: e.message })
     }

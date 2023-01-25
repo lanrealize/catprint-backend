@@ -17,7 +17,7 @@ async function getUser(req, res) {
 async function deleteUser(req, res) {
     try {
         await User.deleteOne({openID: req.wxUser.openID})
-        res.status(204).json({ message: `User with id: ${req.params.openID} deleted`})
+        res.status(204).json({ message: `User with id: ${req.wxUser.openID} deleted`})
     } catch(e) {
         res.status(500).json({ message: e.message })
     }
@@ -44,7 +44,7 @@ async function getUserByOpenID(req, res, next) {
     try {
         user = await User.findOne({openID: req.wxUser.openID})
         // TODO: automatically register should be implement here
-        if (user == null) return res.status(404).json({ message: `User with id: ${req.params._id} not fount`})
+        if (user == null) return res.status(404).json({ message: `User with OpenID: ${req.wxUser.openID} not fount`})
     } catch (e) {
         res.status(500).json({ message: e.message })
     }

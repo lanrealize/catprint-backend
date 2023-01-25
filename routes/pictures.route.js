@@ -2,15 +2,16 @@ const express = require('express')
 const router = express.Router()
 const userCOntroller = require('../controllers/users.controller')
 const picturesController = require('../controllers/pictures.controller')
+const authController = require('../controllers/auth.controller')
 
 const picturesRouter = express.Router({mergeParams: true});
 
-picturesRouter.get('/', userCOntroller.getUserByOpenID, picturesController.getPictures)
+picturesRouter.get('/', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.getPictures)
 
-picturesRouter.get('/:picID', userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.getPicture)
+picturesRouter.get('/:picID', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.getPicture)
 
-picturesRouter.delete('/:picID', userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.deletePicture)
+picturesRouter.delete('/:picID', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.deletePicture)
 
-picturesRouter.post('/', userCOntroller.getUserByOpenID, picturesController.postPicture)
+picturesRouter.post('/', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.postPicture)
 
 module.exports = picturesRouter
