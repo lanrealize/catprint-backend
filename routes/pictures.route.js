@@ -12,6 +12,6 @@ picturesRouter.get('/:picID', authController.authenticateToken, userCOntroller.g
 
 picturesRouter.delete('/:picID', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.getPicByID, picturesController.deletePicture)
 
-picturesRouter.post('/', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.postPicture)
+picturesRouter.post('/', authController.authenticateToken, userCOntroller.getUserByOpenID, picturesController.uploader.single('picture'), picturesController.postPicture)
 
 module.exports = picturesRouter

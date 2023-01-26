@@ -1,5 +1,7 @@
 // const { PicGo } = require('picgo')
 
+const utils = require('./utils/utils')
+
 // const picgo = new PicGo('./config.json')
 
 // console.log(picgo.getConfig())
@@ -16,37 +18,37 @@
 // main()
 
 
-function thisIsAtest() {
-    return new Promise( (resolve, reject) => {
-        const a = 1
-        if (a === 1) {
-            setTimeout(() => {
-                console.log('here')
-                resolve('te')
-            }, 2000)
-            console.log('hi')
-        } else {
-            console.log('reject')
-            reject('reject')
-        }
-    } )
-}
+// function thisIsAtest() {
+//     return new Promise( (resolve, reject) => {
+//         const a = 1
+//         if (a === 1) {
+//             setTimeout(() => {
+//                 console.log('here')
+//                 resolve('te')
+//             }, 2000)
+//             console.log('hi')
+//         } else {
+//             console.log('reject')
+//             reject('reject')
+//         }
+//     } )
+// }
 
-async function test2() {
+// async function test2() {
 
-    try {
-        const result = thisIsAtest()
-        setTimeout(() => {
-            console.log(result)
-        }, 5000);
-        console.log(result)
-    } catch (e) {
-        console.log(e)
-    }
+//     try {
+//         const result = thisIsAtest()
+//         setTimeout(() => {
+//             console.log(result)
+//         }, 5000);
+//         console.log(result)
+//     } catch (e) {
+//         console.log(e)
+//     }
 
-}
+// }
 
-test2()
+// test2()
 
 // thisIsAtest().then((res) => {
 //     console.log(typeof(res))
@@ -79,3 +81,30 @@ test2()
 // main()
 
 
+// const cutils = require('./utils/utils')
+
+// async function test() {
+//     try {
+//         const fileName = await cutils.removeFile('C:/Users/zgx/Desktop/github/catprint-backend/images/sdf.txt')
+//         console.log(fileName)
+//     } catch (e) {
+//         console.log(e)
+//     }   
+// }
+
+// test()
+
+
+const sd = require('silly-datetime')
+
+const time = sd.format(new Date(), 'YY-MM-DD HH:mm:ss')
+
+console.log(time)
+
+
+
+
+// fs.unlink('C:/Users/zgx/Desktop/github/catprint-backend/images/d.txt', (err) => {
+//     if (err) throw err;
+//     console.log('文件已删除');
+//   });
