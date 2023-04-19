@@ -1,14 +1,14 @@
 {
     "picBed": {
-      "uploader": "qiniu",
-      "current": "qiniu",
+      "uploader": "github",
+      "current": "github",
       "transformer": "path",
       "github": {
         "repo": "lanrealize/images",
         "branch": "main",
-        "token": "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",
+        "token": "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",
         "path": "",
-        "customUrl": ""
+        "customUrl": "https://cdn.jsdelivr.net/gh/lanrealize/images@main"
       },
       "qiniu": {
         "accessKey": "FM1tFlwY0o_2l8-rHUdZ2CowB0oMfMnSAR6tQIQ5",

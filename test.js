@@ -1,21 +1,21 @@
-// const { PicGo } = require('picgo')
+const { PicGo } = require('picgo')
 
-const utils = require('./utils/utils')
+// const utils = require('./utils/utils')
 
-// const picgo = new PicGo('./config.json')
+const picgo = new PicGo('./config.json')
 
-// console.log(picgo.getConfig())
+console.log(picgo.getConfig())
 
-// console.log(picgo.configPath)
+console.log(picgo.configPath)
 
 
 
-// async function main() {
-//     const res = await picgo.upload(['./icon.png'])
-//     console.log(res) 
-// }
+async function main() {
+    const res = await picgo.upload(['./debug7.jpg'])
+    console.log(res) 
+}
 
-// main()
+main()
 
 
 // function thisIsAtest() {
@@ -95,11 +95,11 @@ const utils = require('./utils/utils')
 // test()
 
 
-const sd = require('silly-datetime')
+// const sd = require('silly-datetime')
 
-const time = sd.format(new Date(), 'YY-MM-DD HH:mm:ss')
+// const time = sd.format(new Date(), 'YY-MM-DD HH:mm:ss')
 
-console.log(time)
+// console.log(time)
 
 
 
