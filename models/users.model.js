@@ -2,15 +2,24 @@ const mongoose = require('mongoose')
 
 const pictureSchema = new mongoose.Schema({
     id: { type: String, required: true },
-    url: { type: String, required: true },
-    timeStamp: { type: String, required: true },
-    width: { type: Number, required: false },
-    height: { type: Number, required: false },
-    description: { type: String, required: true } }, { _id : false })
+    title: { type: String, required: true },
+    subTitle: { type: String, required: true },
+    location: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    description: { type: String, required: true }}, { _id : false })
+
+const albumSchema = new mongoose.Schema({
+    id: { type: String, required: true },
+    title: { type: String, required: true },
+    subTitle: { type: String, required: true },
+    description: { type: String, required: true },
+    Images: {type: [pictureSchema], required: true},
+    mainImage: {type: pictureSchema, required: true},
+    subImages: {type: [pictureSchema], required: true}}, { _id : false })
 
 const userSchema = new mongoose.Schema({
     openID: { type: String, required: true },
-    pictures: [pictureSchema] })
+    albums: { type: [albumSchema], required: true }}, { _id : false })
 
 module.exports = mongoose.model('User', userSchema)
 
