@@ -7,13 +7,12 @@ function login(req, res) {
 
     const url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + process.env.APP_ID + '&secret=' + process.env.APP_SECRET + '&js_code=' + req.body.code + '&grant_type=authorization_code'
 
-    console.log(`get openID sucessfully`)
-
     request(url, (err, response, body) => {
-        const session = JSON.parse(body)
-        const wxUser = { openID: session.openid }
-        const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
-        console.log(`cteated access token successfully`)
+        console.log(`get openID sucessfully`);
+        const session = JSON.parse(body);
+        const wxUser = { openID: session.openid };
+        // const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
+        // console.log(`cteated access token successfully`)
 
         User.findOne({openID: wxUser.openID}).then((user) => {
             if (user == null) {
@@ -21,14 +20,14 @@ function login(req, res) {
                     User.create({ openID: wxUser.openID, pictures: [] })
                     console.log(`cteated user successfully`)
 
-                    res.status(201).json({accessToken: accessToken})
-                    console.log(`granted access token successfully`)
+                    res.status(201).json({openID: wxUser.openID})
+                    // console.log(`granted access token successfully`)
                 } catch (e) {
                     console.log(e.message)
                     res.status(400).json({ message: e.message })
                 }
             } else {
-                res.status(200).json({accessToken: accessToken})
+                res.status(200).json({openID: wxUser.openID})
                 console.log(`granted access token successfully`)
             }
         })

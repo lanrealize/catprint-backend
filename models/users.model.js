@@ -19,7 +19,7 @@ const albumSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
     openID: { type: String, required: true },
-    albums: { type: [albumSchema], required: true }}, { _id : false })
+    albums: { type: [albumSchema], required: true }})
 
 module.exports = mongoose.model('User', userSchema)
 
