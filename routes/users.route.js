@@ -7,12 +7,12 @@ const picturesRouter = require('./pictures.route')
 
 router.use('/pictures', picturesRouter)
 
-// router.get('/', userController.getUsers)
+router.get('/', userController.getUsers)
 
 router.get('/', authController.authenticateToken, userController.getUserByOpenID, userController.getUser)
 
 router.delete('/', authController.authenticateToken, userController.getUserByOpenID, userController.deleteUser)
 
-// router.post('/', userController.createUser)
+router.post('/', userController.createUser)
 
 module.exports = router

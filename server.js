@@ -22,7 +22,7 @@ async function main() {
     app.use(express.json())
 
     const usersRouter = require('./routes/users.route')
-    app.use('/user', usersRouter)
+    app.use('/users', usersRouter)
 
     const authRouter = require('./routes/auth.route')
     app.use('/auth', authRouter)
