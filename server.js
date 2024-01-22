@@ -22,10 +22,10 @@ async function main() {
     app.use(express.json())
 
     const usersRouter = require('./routes/users.route')
-    app.use('/users', usersRouter)
+    app.use('/api/mp/users', usersRouter)
 
     const authRouter = require('./routes/auth.route')
-    app.use('/auth', authRouter)
+    app.use('/api/mp/auth', authRouter)
     
     app.listen(3000, () => console.log('listening on port 3000...'))
 }

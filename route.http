@@ -1,0 +1,38 @@
+GET https://www.lifeprint.site/api/mp/users
+
+###
+
+GET http://localhost:3000/user
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NDQ2MDI5fQ.gfi4yg8C62xdgbmKQsFhIi6AeV4Jlm0NEp8DhmV43Cg
+
+###
+
+DELETE http://localhost:3000/user
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NDQ2MDI5fQ.gfi4yg8C62xdgbmKQsFhIi6AeV4Jlm0NEp8DhmV43Cg
+
+###
+
+GET http://localhost:3000/user/pictures
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjgyMDY3MDQ0fQ.YDZkYk67xIrf78WmRHXTVrSSBZkRSLy9-0pyf4jg7xM
+
+###
+
+POST http://localhost:3000/user/pictures
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NTQ0NzY2fQ.F-uf9TJUmMx9vFgwleSGRiU4QMqv5nDjKYrEDC7KacA
+Content-Type: application/json
+
+{
+  "url": "url3",
+  "timeStamp": "now2",
+  "description": "demo2"
+}
+
+###
+
+GET http://localhost:3000/user/pictures/1b6cb4e0-9d10-11ed-8afa-69f41af5ce2c
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NDQ2MDI5fQ.gfi4yg8C62xdgbmKQsFhIi6AeV4Jlm0NEp8DhmV43Cg
+
+###
+
+DELETE http://localhost:3000/user/pictures/3c049fa0-9cd0-11ed-b788-6991ccc9fd5f
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NDQ2MDI5fQ.gfi4yg8C62xdgbmKQsFhIi6AeV4Jlm0NEp8DhmV43Cg
