@@ -62,12 +62,77 @@ async function createAlbums(req, res) {
 }
 
 async function getAlbum(req, res) {
-    const user = await User.findOne({openID: req.params.openID})
+    try {
+        const user = await User.findOne({openID: req.params.openID})
+        switch (req.body.type) {
+            case "createdAlbums":
+                console.log("Albums type createdAlbums.");
+                const createdAlbum = user.createdAlbums.find(album => album.id === req.params.albumID);
+                console.log(createdAlbum)
+                res.json(createdAlbum);
+                break;
+            case "sharedAlbums":
+                console.log("Albums type sharedAlbums.");
+                const sharedAlbum = user.sharedAlbums.find(album => album.id === req.params.albumID);
+                res.json(sharedAlbum);
+                break;
+            default:
+                console.log("Albums type not specified.");
+                res.status(200);
+                break;
+        }
+    } catch (e) {
+        console.log("Get album failed")
+        res.status(500).json({ message: e.message })
+    }
+}
+
+async function deleteAlbum(req, res) {
+    try {
+        switch (req.body.type) {
+            case "createdAlbums":
+                User.findOneAndUpdate(
+                    { openID: req.params.openID },
+                    { $pull: { 'createdAlbums': { id: req.params.albumID } } },
+                    { new: true },
+                    (err, updatedUser) => {
+                        if (err) {
+                          console.error(err);
+                        } else {
+                            res.json(updatedUser);
+                        }
+                      }
+                )
+                break;
+            case "sharedAlbums":
+                User.findOneAndUpdate(
+                    { openID: req.params.openID },
+                    { $pull: { 'sharedAlbums': { id: req.params.albumID } } },
+                    { new: true },
+                    (err, updatedUser) => {
+                        if (err) {
+                            console.error(err);
+                        } else {
+                            res.json(updatedUser);
+                        }
+                      }
+                )
+                break;
+            default:
+                console.log("Albums type not specified.");
+                res.status(200);
+                break;
+        }
+    } catch (e) {
+        console.log("Delete album failed")
+        res.status(500).json({ message: e.message })
+    }
 }
 
 
 module.exports = {
     getAlbums: getAlbums,
     createAlbums: createAlbums,
-    getAlbum: getAlbum
+    getAlbum: getAlbum,
+    deleteAlbum: deleteAlbum
 }
