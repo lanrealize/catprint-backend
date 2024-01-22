@@ -4,6 +4,7 @@ const User = require('../models/users.model')
 async function getUsers(req, res) {
     try {
         const users = await User.find()
+        console.log(users)
         res.json(users)
     } catch (e) {
         res.status(500).json({ message: e.message })
@@ -12,7 +13,8 @@ async function getUsers(req, res) {
 
 async function getUser(req, res) {
     try {
-        const user = await User.find({openID: req.params.userID})
+        const user = await User.findOne({openID: req.params.openID})
+        console.log(user)
         res.json(user)
     } catch (e) {
         res.status(500).json({ message: e.message })
@@ -21,8 +23,8 @@ async function getUser(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        await User.deleteOne({openID: req.params.userID})
-        res.status(204).json({ message: `User with id: ${req.params.userID} deleted`})
+        await User.deleteOne({openID: req.params.openID})
+        res.status(204).json({ message: `User with id: ${req.params.openID} deleted`})
     } catch(e) {
         res.status(500).json({ message: e.message })
     }
@@ -31,8 +33,8 @@ async function deleteUser(req, res) {
 async function createUser(req, res) {
 
     try {
-        User.create({openID: req.params.userID})
-        res.status(201).json({message: `created ${req.params.userID} successfully`})
+        User.create({openID: req.params.openID})
+        res.status(201).json({message: `created ${req.params.openID} successfully`})
 
     } catch (e) {
         res.status(400).json({ message: e.message })

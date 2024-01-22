@@ -11,12 +11,12 @@ const pictureSchema = new mongoose.Schema({
 
 const albumSchema = new mongoose.Schema({
     id: { type: String, required: true },
-    title: { type: String, required: true },
-    subTitle: { type: String, required: true },
-    description: { type: String, required: true },
-    Images: {type: [pictureSchema], required: true},
-    mainImage: {type: pictureSchema, required: true},
-    subImages: {type: [pictureSchema], required: true}
+    title: { type: String, required: false },
+    subTitle: { type: String, required: false },
+    description: { type: String, required: false },
+    Images: {type: [pictureSchema], required: false},
+    mainImage: {type: pictureSchema, required: false},
+    subImages: {type: [pictureSchema], required: false}
 }, { _id : false })
 
 const userSchema = new mongoose.Schema({

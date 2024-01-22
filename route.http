@@ -1,4 +1,4 @@
-GET https://www.lifeprint.site/api/mp/users
+GET http://localhost:3000/api/mp/users
 
 ###
 GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
@@ -9,9 +9,29 @@ DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 ###
 POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 
+###
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums
+Content-Type: application/json
 
+{
+  "type": "createdAlbums"
+}
 
+###
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/0e14fe90-b93b-11ee-bcba-7f0eaa16b1ec
+Content-Type: application/json
 
+{
+  "type": "createdAlbums"
+}
+
+###
+POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums
+Content-Type: application/json
+
+{
+  "type": "sharedAlbums"
+}
 
 
 

@@ -1,18 +1,14 @@
 const express = require('express')
-const router = express.Router()
+const usersRouter = express.Router()
 const userController = require('../controllers/users.controller')
-const authController = require('../controllers/auth.controller')
 
-// const picturesRouter = require('./pictures.route')
+const albumsRouter = require('./albums.route')
 
-// router.use('/pictures', picturesRouter)
+usersRouter.use('/:openID/albums', albumsRouter)
 
-router.get('/', userController.getUsers)
+usersRouter.get('/', userController.getUsers)
+usersRouter.get('/:openID', userController.getUser)
+usersRouter.delete('/:openID', userController.deleteUser)
+usersRouter.post('/:openID', userController.createUser)
 
-router.get('/:userID', userController.getUser)
-
-router.delete('/:userID', userController.deleteUser)
-
-router.post('/:userID', userController.createUser)
-
-module.exports = router
+module.exports = usersRouter
