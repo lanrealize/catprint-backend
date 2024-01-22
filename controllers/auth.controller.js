@@ -17,7 +17,7 @@ function login(req, res) {
         User.findOne({openID: wxUser.openID}).then((user) => {
             if (user == null) {
                 try {
-                    User.create({ openID: wxUser.openID, pictures: [] })
+                    User.create({ openID: wxUser.openID})
                     console.log(`cteated user successfully`)
 
                     res.status(201).json({openID: wxUser.openID})

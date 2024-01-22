@@ -1,7 +1,27 @@
 GET https://www.lifeprint.site/api/mp/users
 
 ###
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 
+###
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
+
+###
+POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
 GET http://localhost:3000/user
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVuSUQiOiJvTVp6WjRxb3oxT0JaNEduaEZNNG93ODJiZnVjIiwiaWF0IjoxNjc0NDQ2MDI5fQ.gfi4yg8C62xdgbmKQsFhIi6AeV4Jlm0NEp8DhmV43Cg
 

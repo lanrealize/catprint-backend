@@ -3,16 +3,16 @@ const router = express.Router()
 const userController = require('../controllers/users.controller')
 const authController = require('../controllers/auth.controller')
 
-const picturesRouter = require('./pictures.route')
+// const picturesRouter = require('./pictures.route')
 
-router.use('/pictures', picturesRouter)
+// router.use('/pictures', picturesRouter)
 
 router.get('/', userController.getUsers)
 
-router.get('/', authController.authenticateToken, userController.getUserByOpenID, userController.getUser)
+router.get('/:userID', userController.getUser)
 
-router.delete('/', authController.authenticateToken, userController.getUserByOpenID, userController.deleteUser)
+router.delete('/:userID', userController.deleteUser)
 
-router.post('/', userController.createUser)
+router.post('/:userID', userController.createUser)
 
 module.exports = router
