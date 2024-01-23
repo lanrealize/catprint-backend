@@ -28,26 +28,10 @@ const uploader = multer({ storage: storage });
 async function getPictures(req, res) {
   try {
     const user = await User.findOne({ openID: req.params.openID });
-    switch (req.body.type) {
-      case "createdAlbums":
-        console.log("Albums type => createdAlbums.");
-        const createdAlbum = user.createdAlbums.find(
-          (album) => album.id === req.params.albumID
-        );
-        res.json(createdAlbum.images);
-        break;
-      case "sharedAlbums":
-        console.log("Albums type => sharedAlbums.");
-        const sharedAlbum = user.sharedAlbums.find(
-          (album) => album.id === req.params.albumID
-        );
-        res.json(sharedAlbum.images);
-        break;
-      default:
-        console.log("Albums type not specified.");
-        res.status(200);
-        break;
-    }
+    const album = user[req.body.type].find(
+      (album) => album.id === req.params.albumID
+    );
+    res.json(album.images);
   } catch (e) {
     console.log("Get pictures failed");
     res.status(500).json({ message: e.message });
@@ -90,45 +74,15 @@ async function postPicture(req, res) {
       description: undefined,
     };
 
-    switch (req.body.type) {
-      case "createdAlbums":
-        console.log("Albums type => createdAlbums.");
-        try {
-          const updatedUser = await User.findOneAndUpdate(
-            {
-              openID: req.params.openID,
-              "createdAlbums.id": req.params.albumID,
-            },
-            { $push: { "createdAlbums.$.images": image } },
-            { new: true }
-          );
-          res.json(updatedUser);
-        } catch (e) {
-          res.json({ message: e.message });
-        }
-
-        break;
-      case "sharedAlbums":
-        console.log("Albums type => sharedAlbums.");
-        try {
-          const updatedUser = await User.findOneAndUpdate(
-            {
-              openID: req.params.openID,
-              "sharedAlbums.id": req.params.albumID,
-            },
-            { $push: { "sharedAlbums.$.images": image } },
-            { new: true }
-          );
-          res.json(updatedUser);
-        } catch (e) {
-          res.json({ message: e.message });
-        }
-
-        break;
-      default:
-        res.status(500).json({ message: "Albums type not specified." });
-        break;
-    }
+    const updatedUser = await User.findOneAndUpdate(
+      {
+        openID: req.params.openID,
+        [`${req.body.type}.id`]: req.params.albumID,
+      },
+      { $push: { [`${req.body.type}.$.images`]: image } },
+      { new: true }
+    );
+    res.json(updatedUser);
   } catch (e) {
     console.log("Post pictures failed");
     res.status(500).json({ message: e.message });
@@ -151,45 +105,15 @@ async function getPicture(req, res) {
 
 async function deletePicture(req, res) {
   try {
-    switch (req.body.type) {
-      case "createdAlbums":
-        console.log("Albums type => createdAlbums.");
-        try {
-          const updatedUser = await User.findOneAndUpdate(
-            {
-              openID: req.params.openID,
-              "createdAlbums.id": req.params.albumID,
-            },
-            { $pull: { "createdAlbums.$.Images": { id: req.params.picID } } },
-            { new: true }
-          );
-          res.json(updatedUser);
-        } catch (e) {
-          res.json({ message: e.message });
-        }
-
-        break;
-      case "sharedAlbums":
-        console.log("Albums type => sharedAlbums.");
-        try {
-          const updatedUser = await User.findOneAndUpdate(
-            {
-              openID: req.params.openID,
-              "sharedAlbums.id": req.params.albumID,
-            },
-            { $pull: { "sharedAlbums.$.images": { id: req.params.picID } } },
-            { new: true }
-          );
-          res.json(updatedUser);
-        } catch (e) {
-          res.json({ message: e.message });
-        }
-
-        break;
-      default:
-        res.status(500).json({ message: "Albums type not specified." });
-        break;
-    }
+    const updatedUser = await User.findOneAndUpdate(
+      {
+        openID: req.params.openID,
+        [`${req.body.type}.id`]: req.params.albumID,
+      },
+      { $pull: { [`${req.body.type}.$.images`]: { id: req.params.picID } } },
+      { new: true }
+    );
+    res.json(updatedUser);
   } catch (e) {
     console.log("Delete picture failed");
     res.status(500).json({ message: e.message });
