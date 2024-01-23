@@ -68,7 +68,6 @@ async function getAlbum(req, res) {
             case "createdAlbums":
                 console.log("Albums type createdAlbums.");
                 const createdAlbum = user.createdAlbums.find(album => album.id === req.params.albumID);
-                console.log(createdAlbum)
                 res.json(createdAlbum);
                 break;
             case "sharedAlbums":

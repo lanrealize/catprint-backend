@@ -25,7 +25,28 @@ const storage = multer.diskStorage({
 const uploader = multer({storage: storage})
 
 async function getPictures(req, res) {
-    res.json(res.user.pictures)
+    try {
+        const user = await User.findOne({openID: req.params.openID})
+        switch (req.body.type) {
+            case "createdAlbums":
+                console.log("Albums type => createdAlbums.");
+                const createdAlbum = user.createdAlbums.find(album => album.id === req.params.albumID);
+                res.json(createdAlbum.images);
+                break;
+            case "sharedAlbums":
+                console.log("Albums type => sharedAlbums.");
+                const sharedAlbum = user.sharedAlbums.find(album => album.id === req.params.albumID);
+                res.json(sharedAlbum.images);
+                break;
+            default:
+                console.log("Albums type not specified.");
+                res.status(200);
+                break;
+        }
+    } catch (e) {
+        console.log("Get pictures failed")
+        res.status(500).json({ message: e.message })
+    }
 }
 
 // async function postPicture(req, res) {

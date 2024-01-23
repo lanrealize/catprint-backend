@@ -14,9 +14,7 @@ const albumSchema = new mongoose.Schema({
     title: { type: String, required: false },
     subTitle: { type: String, required: false },
     description: { type: String, required: false },
-    Images: {type: [pictureSchema], required: false},
-    mainImage: {type: pictureSchema, required: false},
-    subImages: {type: [pictureSchema], required: false}
+    images: {type: [pictureSchema], required: false}
 }, { _id : false })
 
 const userSchema = new mongoose.Schema({
