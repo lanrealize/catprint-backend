@@ -49,6 +49,18 @@ Content-Type: application/json
   "type": "createdAlbums"
 }
 
+###
+PUT http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/a41e5b10-b9eb-11ee-b4b3-2d148b4ee929
+Content-Type: application/json
+
+{
+  "type": "createdAlbums",
+  "title": "9月",
+  "subTitle": "23日·舟山"
+}
+
+
+
 
 
 

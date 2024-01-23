@@ -11,6 +11,7 @@ albumsRouter.get('/', albumsController.getAlbums)
 albumsRouter.post('/', albumsController.createAlbums)
 albumsRouter.get('/:albumID', albumsController.getAlbum)
 albumsRouter.delete('/:albumID', albumsController.deleteAlbum)
+albumsRouter.put('/:albumID', albumsController.updateAlbum)
 
 
 module.exports = albumsRouter

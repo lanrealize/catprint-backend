@@ -70,9 +70,39 @@ async function deleteAlbum(req, res) {
   }
 }
 
+async function updateAlbum(req, res) {
+    try {
+        const album = {
+            id: req.params.albumID,
+            title: req.body.title,
+            subTitle: req.body.subTitle,
+            description: "我开始没有了期待，但如果你来，我一定会喜笑颜开。",
+            Images: [],
+            mainImage: undefined,
+            subImages: undefined,
+          };
+
+        const updatedUser = await User.findOneAndUpdate(
+            { openID: req.params.openID, [`${req.body.type}.id`]: req.params.albumID },
+            { $set: { [`${req.body.type}.$`]: album } },
+            { new: true }
+          );
+      
+          if (!updatedUser) {
+            res.status(404).json("未找到符合条件的item");
+          }
+      
+          res.json(updatedUser);
+    } catch (e) {
+        console.log("Update album failed");
+        res.status(500).json({ message: e.message });
+    }
+}
+
 module.exports = {
   getAlbums: getAlbums,
   createAlbums: createAlbums,
   getAlbum: getAlbum,
   deleteAlbum: deleteAlbum,
+  updateAlbum: updateAlbum
 };
