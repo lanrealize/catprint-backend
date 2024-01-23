@@ -1,13 +1,15 @@
 GET http://localhost:3000/api/mp/users
 
 ###
+POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
+
+###
 GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 
 ###
 DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 
-###
-POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
+
 
 
 
@@ -20,7 +22,7 @@ GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 ###
@@ -28,23 +30,23 @@ POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 ###
-GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/0e14fe90-b93b-11ee-bcba-7f0eaa16b1ec
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b50697d0-b9c8-11ee-8789-3b2184ec8f13
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/7e9b8170-b940-11ee-bdc1-67b8ceeff37c
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/f77e4770-b9c8-11ee-ad61-4520abdd4d74
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 

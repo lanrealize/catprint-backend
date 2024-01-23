@@ -99,7 +99,7 @@ async function postPicture(req, res) {
               openID: req.params.openID,
               "createdAlbums.id": req.params.albumID,
             },
-            { $push: { "createdAlbums.$.Images": image } },
+            { $push: { "createdAlbums.$.images": image } },
             { new: true }
           );
           res.json(updatedUser);
