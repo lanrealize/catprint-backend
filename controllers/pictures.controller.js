@@ -82,6 +82,9 @@ async function postPicture(req, res) {
       { $push: { [`${req.body.type}.$.images`]: image } },
       { new: true }
     );
+    if (!updatedUser) {
+      res.status(404).json("未找到符合条件的item");
+    }
     res.json(updatedUser);
   } catch (e) {
     console.log("Post pictures failed");
@@ -113,6 +116,9 @@ async function deletePicture(req, res) {
       { $pull: { [`${req.body.type}.$.images`]: { id: req.params.picID } } },
       { new: true }
     );
+    if (!updatedUser) {
+      res.status(404).json("未找到符合条件的item");
+    }
     res.json(updatedUser);
   } catch (e) {
     console.log("Delete picture failed");

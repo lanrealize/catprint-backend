@@ -28,6 +28,9 @@ async function createAlbums(req, res) {
       { $push: { [`${req.body.type}`]: album } },
       { new: true }
     );
+    if (!updatedUser) {
+      res.status(404).json("未找到符合条件的item");
+    }
     res.json(updatedUser);
   } catch (e) {
     console.log("Create album failed");
@@ -55,6 +58,11 @@ async function deleteAlbum(req, res) {
       { $pull: { [`${req.body.type}`]: { id: req.params.albumID } } },
       { new: true }
     );
+
+    if (!updatedUser) {
+      res.status(404).json("未找到符合条件的item");
+    }
+
     res.json(updatedUser);
   } catch (e) {
     console.log("Delete album failed");
