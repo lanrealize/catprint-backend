@@ -42,7 +42,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/f77e4770-b9c8-11ee-ad61-4520abdd4d74
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/1fbd1bc0-b9cf-11ee-942b-0b70d9ae1ab8
 Content-Type: application/json
 
 {
@@ -71,19 +71,19 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/2ef6ed90-b99e-11ee-8e87-4590f86b3837/pictures/b4f09210-b9b8-11ee-8cee-7d0c9b3c095d
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b50697d0-b9c8-11ee-8789-3b2184ec8f13/pictures/680c5650-b9cc-11ee-9c1f-5bc4d56db4b5
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/2ef6ed90-b99e-11ee-8e87-4590f86b3837/pictures/f21be720-b9b8-11ee-bea0-134f57d27847
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b50697d0-b9c8-11ee-8789-3b2184ec8f13/pictures/98c15540-b9cf-11ee-8011-4932e80d7980
 Content-Type: application/json
 
 {
-  "type": "sharedAlbums"
+  "type": "createdAlbums"
 }
 
 
