@@ -100,7 +100,7 @@ async function deleteAlbum(req, res) {
                         } else {
                             res.json(updatedUser);
                         }
-                      }
+                    }
                 )
                 break;
             case "sharedAlbums":

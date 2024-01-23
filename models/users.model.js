@@ -3,10 +3,10 @@ const mongoose = require('mongoose')
 const pictureSchema = new mongoose.Schema({
     id: { type: String, required: true },
     title: { type: String, required: true },
-    subTitle: { type: String, required: true },
-    location: { type: String, required: true },
-    imageUrl: { type: String, required: true },
-    description: { type: String, required: true }
+    subTitle: { type: String, required: false },
+    location: { type: String, required: false },
+    imageUrl: { type: String, required: false },
+    description: { type: String, required: false }
 }, { _id : false })
 
 const albumSchema = new mongoose.Schema({

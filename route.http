@@ -60,6 +60,30 @@ Content-Type: application/json
   "type": "sharedAlbums"
 }
 
+###
+POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/2ef6ed90-b99e-11ee-8e87-4590f86b3837/pictures
+Content-Type: application/json
+
+{
+  "type": "sharedAlbums"
+}
+
+###
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/2ef6ed90-b99e-11ee-8e87-4590f86b3837/pictures/b4f09210-b9b8-11ee-8cee-7d0c9b3c095d
+Content-Type: application/json
+
+{
+  "type": "sharedAlbums"
+}
+
+###
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/2ef6ed90-b99e-11ee-8e87-4590f86b3837/pictures/f1051ff0-b9b8-11ee-bea0-134f57d27847
+Content-Type: application/json
+
+{
+  "type": "sharedAlbums"
+}
+
 
 
 
