@@ -65,14 +65,20 @@ async function postPicture(req, res) {
   //     res.status(500).json({ message: e.message })
   // }
   try {
+    console.log('called');
+    const imageId = uuid.v1();
     const image = {
-      id: uuid.v1(),
+      id: imageId,
       title: "8月",
       subTitle: undefined,
       location: undefined,
       imageUrl: undefined,
       description: undefined,
     };
+
+    console.log(req.params.openID)
+    console.log(req.params.albumID)
+    console.log(req.body)
 
     const updatedUser = await User.findOneAndUpdate(
       {
@@ -84,8 +90,9 @@ async function postPicture(req, res) {
     );
     if (!updatedUser) {
       res.status(404).json("未找到符合条件的item");
+    } else {
+      res.json({id: imageId});
     }
-    res.json(updatedUser);
   } catch (e) {
     console.log("Post pictures failed");
     res.status(500).json({ message: e.message });

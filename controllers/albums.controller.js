@@ -13,8 +13,9 @@ async function getAlbums(req, res) {
 
 async function createAlbums(req, res) {
   try {
+    const albumId = uuid.v1();
     const album = {
-      id: uuid.v1(),
+      id: albumId,
       title: "8月",
       subTitle: "16日·广州",
       description: "我开始没有了期待，但如果你来，我一定会喜笑颜开。",
@@ -30,8 +31,9 @@ async function createAlbums(req, res) {
     );
     if (!updatedUser) {
       res.status(404).json("未找到符合条件的item");
+    } else {
+      res.json({id: albumId});
     }
-    res.json(updatedUser);
   } catch (e) {
     console.log("Create album failed");
     res.status(500).json({ message: e.message });
