@@ -16,8 +16,8 @@ async function createAlbums(req, res) {
     const albumId = uuid.v1();
     const album = {
       id: albumId,
-      title: "8月",
-      subTitle: "16日·广州",
+      title: "",
+      subTitle: "",
       description: "我开始没有了期待，但如果你来，我一定会喜笑颜开。",
       Images: [],
       mainImage: undefined,
@@ -74,19 +74,12 @@ async function deleteAlbum(req, res) {
 
 async function updateAlbum(req, res) {
     try {
-        const album = {
-            id: req.params.albumID,
-            title: req.body.title,
-            subTitle: req.body.subTitle,
-            description: "我开始没有了期待，但如果你来，我一定会喜笑颜开。",
-            Images: [],
-            mainImage: undefined,
-            subImages: undefined,
-          };
-
         const updatedUser = await User.findOneAndUpdate(
             { openID: req.params.openID, [`${req.body.type}.id`]: req.params.albumID },
-            { $set: { [`${req.body.type}.$`]: album } },
+            { $set: {
+              [`${req.body.type}.$.title`]: req.body.title,
+              [`${req.body.type}.$.subTitle`]: req.body.subTitle
+            }  },
             { new: true }
           );
       
