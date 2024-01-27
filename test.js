@@ -1,6 +1,6 @@
 // const { PicGo } = require('picgo')
 
-const utils = require('./utils/utils')
+// const utils = require('./utils/utils')
 
 // const picgo = new PicGo('./config.json')
 
@@ -95,11 +95,11 @@ const utils = require('./utils/utils')
 // test()
 
 
-const sd = require('silly-datetime')
+// const sd = require('silly-datetime')
 
-const time = sd.format(new Date(), 'YY-MM-DD HH:mm:ss')
+// const time = sd.format(new Date(), 'YY-MM-DD HH:mm:ss')
 
-console.log(time)
+// console.log(time)
 
 
 
@@ -108,3 +108,13 @@ console.log(time)
 //     if (err) throw err;
 //     console.log('文件已删除');
 //   });
+
+function parseDate(dateString) {
+    const [year, month, day, hours, minutes] = dateString.split('/').map(Number);
+    return new Date(year, month - 1, day, hours, minutes);
+  }
+  
+  const dateString = "2023/01/31/3/32";
+  const parsedDate = parseDate(dateString);
+  
+  console.log(parsedDate);

@@ -5,6 +5,7 @@ const pictureSchema = new mongoose.Schema({
     title: { type: String, required: true },
     subTitle: { type: String, required: false },
     location: { type: String, required: false },
+    timestamp: { type: String, required: false },
     imageUrl: { type: String, required: false },
     description: { type: String, required: false }
 }, { _id : false })

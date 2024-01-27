@@ -46,13 +46,14 @@ async function postPicture(req, res) {
     const deletion = await fsUtils.removeFile(fullFilePath) // TODO: move this after res
 
     const imageId = uuid.v1();
-    const timestampArray = req.body.timeStamp.split('-')
+    const timestampArray = req.body.timeStamp.split('/')
 
     const image = {
       id: imageId,
       title: timestampArray[3] + ':' + timestampArray[4],
       subTitle: timestampArray[1] + '月' + timestampArray[2] + '日',
       location: undefined,
+      timestamp: req.body.timeStamp,
       imageUrl: picgoRes[0].imgUrl,
       description: req.body.description
     };
