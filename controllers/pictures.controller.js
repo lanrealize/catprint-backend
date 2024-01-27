@@ -28,7 +28,7 @@ const uploader = multer({ storage: storage });
 async function getPictures(req, res) {
   try {
     const user = await User.findOne({ openID: req.params.openID });
-    const album = user[req.body.type].find(
+    const album = user[req.query.type].find(
       (album) => album.id === req.params.albumID
     );
     res.json(album.images);
@@ -39,40 +39,22 @@ async function getPictures(req, res) {
 }
 
 async function postPicture(req, res) {
-  // try {
-  //     const fullFilePath = req.filePath + '/' + req.fileName
-  //     const picgoRes = await picgo.upload([fullFilePath])
-  //     console.log(`Upload picture: ${picgoRes[0].imgUrl} via PicGo successfully.`)
-
-  //     const pic = {
-  //         id: uuid.v1(),
-  //         url: picgoRes[0].imgUrl,
-  //         width: picgoRes[0].width,
-  //         height: picgoRes[0].height,
-  //         timeStamp: sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'),
-  //         description: 'This is a temp description'
-  //     }
-
-  //     res.user.pictures.push(pic)
-  //     await res.user.save()
-  //     console.log(`Save picture ${pic.id} to database successfully`)
-
-  //     const deletion = await fsUtils.removeFile(fullFilePath)
-  //     console.log(`delete local file: ${deletion} successfully`)
-
-  //     res.status(201).json(pic)
-  // } catch (e) {
-  //     res.status(500).json({ message: e.message })
-  // }
   try {
+    const fullFilePath = req.filePath + '/' + req.fileName;
+    const picgoRes = await picgo.upload([fullFilePath]);
+    console.log(`Upload picture: ${picgoRes[0].imgUrl} via PicGo successfully.`);
+    const deletion = await fsUtils.removeFile(fullFilePath) // TODO: move this after res
+
     const imageId = uuid.v1();
+    const timestampArray = req.body.timeStamp.split('-')
+
     const image = {
       id: imageId,
-      title: "8月",
-      subTitle: undefined,
+      title: timestampArray[3] + ':' + timestampArray[4],
+      subTitle: timestampArray[1] + '月' + timestampArray[2] + '日',
       location: undefined,
-      imageUrl: undefined,
-      description: undefined,
+      imageUrl: picgoRes[0].imgUrl,
+      description: req.body.description
     };
 
     const updatedUser = await User.findOneAndUpdate(

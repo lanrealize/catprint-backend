@@ -67,7 +67,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b50697d0-b9c8-11ee-8789-3b2184ec8f13/pictures
+GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/267d0870-bccd-11ee-953b-cf858a01557b/pictures
 Content-Type: application/json
 
 {
