@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const fileName =
-      req.wxUser.openID + "-" + Date.now() + path.extname(file.originalname);
+      req.params.openID + "-" + Date.now() + path.extname(file.originalname);
     console.log(fileName);
     req.fileName = fileName;
     cb(null, fileName);
@@ -65,7 +65,6 @@ async function postPicture(req, res) {
   //     res.status(500).json({ message: e.message })
   // }
   try {
-    console.log('called');
     const imageId = uuid.v1();
     const image = {
       id: imageId,
@@ -75,10 +74,6 @@ async function postPicture(req, res) {
       imageUrl: undefined,
       description: undefined,
     };
-
-    console.log(req.params.openID)
-    console.log(req.params.albumID)
-    console.log(req.body)
 
     const updatedUser = await User.findOneAndUpdate(
       {

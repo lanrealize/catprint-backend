@@ -31,10 +31,17 @@ async function deleteUser(req, res) {
 
 async function createUser(req, res) {
   try {
-    User.create({ openID: req.params.openID });
-    res
-      .status(201)
-      .json({ message: `created ${req.params.openID} successfully` });
+    const user = await User.findOne({ openID: req.params.openID });
+    if (user) {
+      res
+      .status(200)
+      .json({ id: req.params.openID });
+    } else {
+      User.create({ openID: req.params.openID });
+      res
+        .status(201)
+        .json({ id: req.params.openID });
+    }
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
