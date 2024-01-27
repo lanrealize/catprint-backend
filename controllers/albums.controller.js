@@ -4,7 +4,7 @@ const uuid = require("uuid");
 async function getAlbums(req, res) {
   try {
     const user = await User.findOne({ openID: req.params.openID });
-    res.json(user[req.body.type]);
+    res.json(user[req.query.type]);
   } catch (e) {
     console.log("Get albums failed");
     res.status(500).json({ message: e.message });
