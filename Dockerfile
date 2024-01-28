@@ -12,9 +12,12 @@ COPY ./controllers /app/controllers
 COPY ./models /app/models
 COPY ./routes /app/routes
 COPY ./utils /app/utils
+COPY ./services /app/services
 COPY .env /app
 COPY config.json /app
 COPY server.js /app
+
+RUN mkdir /app/images
 
 EXPOSE 3000
 

@@ -7,7 +7,7 @@ POST http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM
+DELETE http://localhost:3000/api/mp/users/6ff41660-bd68-11ee-bcda-f7fbaddaccc3
 
 
 
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b50697d0-b9c8-11ee-8789-3b2184ec8f13/pictures/98c15540-b9cf-11ee-8011-4932e80d7980
+DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/b11e7060-bd66-11ee-bcda-f7fbaddaccc3/pictures/6ff41660-bd68-11ee-bcda-f7fbaddaccc3
 Content-Type: application/json
 
 {
