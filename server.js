@@ -26,6 +26,9 @@ async function main() {
 
     const authRouter = require('./routes/auth.route')
     app.use('/api/mp/auth', authRouter)
+
+    const wordsRouter = require('./routes/words.route')
+    app.use('/api/mp/words', wordsRouter)
     
     app.listen(3000, () => console.log('listening on port 3000...'))
 }
