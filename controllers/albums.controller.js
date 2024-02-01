@@ -43,7 +43,7 @@ async function createAlbums(req, res) {
 async function getAlbum(req, res) {
   try {
     const user = await User.findOne({ openID: req.params.openID });
-    const album = user[`${req.body.type}`].find(
+    const album = user[`${req.query.type}`].find(
       (album) => album.id === req.params.albumID
     );
     res.json(album);
