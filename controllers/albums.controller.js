@@ -57,7 +57,7 @@ async function deleteAlbum(req, res) {
   try {
     const updatedUser = await User.findOneAndUpdate(
       { openID: req.params.openID },
-      { $pull: { [`${req.body.type}`]: { id: req.params.albumID } } },
+      { $pull: { [`${req.query.type}`]: { id: req.params.albumID } } },
       { new: true }
     );
 

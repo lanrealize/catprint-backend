@@ -96,9 +96,9 @@ async function deletePicture(req, res) {
     const updatedUser = await User.findOneAndUpdate(
       {
         openID: req.params.openID,
-        [`${req.body.type}.id`]: req.params.albumID,
+        [`${req.query.type}.id`]: req.params.albumID,
       },
-      { $pull: { [`${req.body.type}.$.images`]: { id: req.params.picID } } },
+      { $pull: { [`${req.query.type}.$.images`]: { id: req.params.picID } } },
       { new: true }
     );
     if (!updatedUser) {
