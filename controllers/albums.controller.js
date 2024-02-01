@@ -18,7 +18,7 @@ async function createAlbums(req, res) {
       id: albumId,
       title: "",
       subTitle: "",
-      description: "我开始没有了期待，但如果你来，我一定会喜笑颜开。",
+      description: "",
       Images: [],
       mainImage: undefined,
       subImages: undefined,
@@ -78,7 +78,8 @@ async function updateAlbum(req, res) {
             { openID: req.params.openID, [`${req.body.type}.id`]: req.params.albumID },
             { $set: {
               [`${req.body.type}.$.title`]: req.body.title,
-              [`${req.body.type}.$.subTitle`]: req.body.subTitle
+              [`${req.body.type}.$.subTitle`]: req.body.subTitle,
+              [`${req.body.type}.$.description`]: req.body.description
             }  },
             { new: true }
           );
