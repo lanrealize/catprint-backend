@@ -57,15 +57,15 @@ async function deleteAlbum(req, res) {
   try {
     const updatedUser = await User.findOneAndUpdate(
       { openID: req.params.openID },
-      { $pull: { [`${req.query.type}`]: { id: req.params.albumID } } },
+      { $pull: { [`${req.body.type}`]: { id: req.params.albumID } } },
       { new: true }
     );
 
     if (!updatedUser) {
       res.status(404).json("未找到符合条件的item");
+    } else {
+      res.json(updatedUser);
     }
-
-    res.json(updatedUser);
   } catch (e) {
     console.log("Delete album failed");
     res.status(500).json({ message: e.message });

@@ -96,15 +96,16 @@ async function deletePicture(req, res) {
     const updatedUser = await User.findOneAndUpdate(
       {
         openID: req.params.openID,
-        [`${req.query.type}.id`]: req.params.albumID,
+        [`${req.body.type}.id`]: req.params.albumID,
       },
-      { $pull: { [`${req.query.type}.$.images`]: { id: req.params.picID } } },
+      { $pull: { [`${req.body.type}.$.images`]: { id: req.params.picID } } },
       { new: true }
     );
     if (!updatedUser) {
       res.status(404).json("未找到符合条件的item");
+    } else {
+      res.json(updatedUser);
     }
-    res.json(updatedUser);
   } catch (e) {
     console.log("Delete picture failed");
     res.status(500).json({ message: e.message });
