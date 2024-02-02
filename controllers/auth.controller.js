@@ -12,30 +12,34 @@ function login(req, res) {
     req.body.code +
     "&grant_type=authorization_code";
 
-  request(url, (err, response, body) => {
-    console.log(`get openID sucessfully`);
-    const session = JSON.parse(body);
-    const wxUser = { openID: session.openid };
-    // const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
-    // console.log(`cteated access token successfully`)
-
-    User.findOne({ openID: wxUser.openID }).then((user) => {
-      if (user == null) {
-        try {
-          User.create({ openID: wxUser.openID });
-          console.log(`cteated user successfully`);
-
-          res.status(201).json({ openID: wxUser.openID });
-        } catch (e) {
-          console.log(e.message);
-          res.status(400).json({ message: e.message });
+  try {
+    request(url, (err, response, body) => {
+      console.log(`get openID sucessfully`);
+      const session = JSON.parse(body);
+      const wxUser = { openID: session.openid };
+      // const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
+      // console.log(`cteated access token successfully`)
+  
+      User.findOne({ openID: wxUser.openID }).then((user) => {
+        if (user == null) {
+          try {
+            User.create({ openID: wxUser.openID });
+            console.log(`cteated user successfully`);
+  
+            res.status(201).json({ openID: wxUser.openID });
+          } catch (e) {
+            console.log(e.message);
+            res.status(400).json({ message: e.message });
+          }
+        } else {
+          res.status(200).json(user);
+          console.log(`granted access token successfully`);
         }
-      } else {
-        res.status(200).json(user);
-        console.log(`granted access token successfully`);
-      }
+      });
     });
-  });
+  } catch(e) {
+    res.status(500).json({ message: e.message });
+  }
 }
 
 function authenticateToken(req, res, next) {
