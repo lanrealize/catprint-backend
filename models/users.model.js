@@ -13,8 +13,6 @@ const pictureSchema = new mongoose.Schema({
 const albumSchema = new mongoose.Schema({
     id: { type: String, required: true },
     title: { type: String, required: false },
-    subTitle: { type: String, required: false },
-    description: { type: String, required: false },
     images: {type: [pictureSchema], required: false}
 }, { _id : false })
 

@@ -16,12 +16,8 @@ async function createAlbums(req, res) {
     const albumId = uuid.v1();
     const album = {
       id: albumId,
-      title: "",
-      subTitle: "",
-      description: "",
-      Images: [],
-      mainImage: undefined,
-      subImages: undefined,
+      title: req.body.title,
+      Images: []
     };
 
     const updatedUser = await User.findOneAndUpdate(
