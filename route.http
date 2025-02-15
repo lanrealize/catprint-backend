@@ -18,7 +18,7 @@ DELETE http://localhost:3000/api/mp/users/6ff41660-bd68-11ee-bcda-f7fbaddaccc3
 
 
 ###
-GET http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums
+GET http://localhost:3000/api/mtm/users/ofXQH7YzES4MxagVJn1d6DAb_5Vg/albums
 Content-Type: application/json
 
 {
@@ -42,7 +42,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/mp/users/oHya266aR6YbGmbD8v8OYi0kfJEM/albums/aed5d470-bcac-11ee-a597-6d4fa5b50ee6
+DELETE http://localhost:3000/api/mtm/users/ofXQH7YzES4MxagVJn1d6DAb_5Vg/albums/78af7ae0-eb72-11ef-ac46-df2843513d48
 Content-Type: application/json
 
 {
