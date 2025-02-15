@@ -7,7 +7,8 @@ const pictureSchema = new mongoose.Schema({
     location: { type: String, required: false },
     timestamp: { type: String, required: false },
     imageUrl: { type: String, required: false },
-    description: { type: String, required: false }
+    description: { type: String, required: false },
+    orientation: { type: String, required: false }
 }, { _id : false })
 
 const albumSchema = new mongoose.Schema({

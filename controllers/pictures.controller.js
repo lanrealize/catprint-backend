@@ -40,6 +40,15 @@ async function getPictures(req, res) {
 
 async function postPicture(req, res) {
   try {
+    const currentConfig = picgo.getConfig('picBed.qiniu');
+
+    picgo.setConfig({
+      'picBed.qiniu': {
+        ...currentConfig,
+        path: `${req.params.openID}/${req.params.albumID}/`
+      }
+    });
+
     const fullFilePath = req.filePath + '/' + req.fileName;
     const picgoRes = await picgo.upload([fullFilePath]);
     console.log(`Upload picture: ${picgoRes[0].imgUrl} via PicGo successfully.`);
@@ -55,7 +64,8 @@ async function postPicture(req, res) {
       location: undefined,
       timestamp: req.body.timeStamp,
       imageUrl: picgoRes[0].imgUrl,
-      description: req.body.description
+      description: req.body.description,
+      orientation: picgoRes[0].width > picgoRes[0].height ? "horizontal" : "vertical"
     };
 
     const updatedUser = await User.findOneAndUpdate(
