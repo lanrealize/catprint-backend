@@ -12,7 +12,7 @@ const picturesService = require("../services/pictures.service");
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    req.filePath = "/app/images";
+    req.filePath = "./";
     cb(null, req.filePath);
   },
   filename: (req, file, cb) => {
