@@ -62,7 +62,7 @@ async function postPicture(req, res) {
       title: timestampArray[3] + ':' + timestampArray[4],
       // subTitle: timestampArray[0] + '年' + timestampArray[1] + '月' + timestampArray[2] + '日',
       subTitle: timestampArray[1] + '月' + timestampArray[2] + '日',
-      location: undefined,
+      location: req.body.location,
       timestamp: req.body.timeStamp,
       imageUrl: picgoRes[0].imgUrl,
       description: req.body.description,
