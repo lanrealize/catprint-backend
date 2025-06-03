@@ -50,11 +50,8 @@ async function postPicture(req, res) {
     // 安全检查
     const result = await contentCheck(fullFilePath);
     if (result['errcode'] !== 0) {
-      if (result['errcode'] === 87014) {
-        return res.status(500).json({ message: 'Unallowed content' });
-      } else {
-        return res.status(500).json({ message: 'Security check failed' });
-      }
+      console.log(result);
+      return res.status(500).json(result);
     }
 
     const picgoRes = await picgo.upload([fullFilePath]);
@@ -93,7 +90,7 @@ async function postPicture(req, res) {
     res.status(500).json({ message: e.message });
   } finally {
     await fsUtils.removeFile(fullFilePath)
-  }
+  } 
 }
 
 async function getPicture(req, res) {
