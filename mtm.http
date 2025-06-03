@@ -2,7 +2,7 @@
 #  User related
 ##########################
 
-GET http://localhost:3000/api/mtm/users
+GET https://www.wltech-service.site/api/mtm/users/
 
 
 ##########################
@@ -10,7 +10,7 @@ GET http://localhost:3000/api/mtm/users
 ##########################
 
 ###
-GET http://localhost:3000/api/mtm/users/ofXQH7YzES4MxagVJn1d6DAb_5Vg/albums?type=createdAlbums
+GET https://www.wltech-service.site/api/mtm/users/ofXQH7YzES4MxagVJn1d6DAb_5Vg/albums?type=createdAlbums
 Content-Type: application/json
 
 ###
@@ -20,3 +20,7 @@ Content-Type: application/json
 {
   "type": "createdAlbums"
 }
+
+###
+DELETE https://www.wltech-service.site/api/mtm/users/ofXQH7Wf5IHCnDspSry3w3Ftq1QI
+

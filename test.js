@@ -109,12 +109,78 @@
 //     console.log('文件已删除');
 //   });
 
-function parseDate(dateString) {
-    const [year, month, day, hours, minutes] = dateString.split('/').map(Number);
-    return new Date(year, month - 1, day, hours, minutes);
+// function parseDate(dateString) {
+//     const [year, month, day, hours, minutes] = dateString.split('/').map(Number);
+//     return new Date(year, month - 1, day, hours, minutes);
+//   }
+  
+//   const dateString = "2023/01/31/3/32";
+//   const parsedDate = parseDate(dateString);
+  
+//   console.log(parsedDate);
+
+require('dotenv').config()
+
+const express = require('express')
+const app = express()
+const mongoose = require('mongoose')
+const wxToken = require("./utils/wxToken");
+const schedule = require('node-schedule');
+const User = require("./models/users.model");
+
+mongoose.set('strictQuery', false)
+mongoose.connect(process.env.DATA_BASE_URL, {
+    authSource: "admin",
+    user: process.env.DATA_BASE_USERNAME,
+    pass: process.env.DATA_BASE_PASSWORD,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+const db = mongoose.connection 
+db.on('error', (error) => {console.log(error)})
+db.once('open', () => {
+    console.log('Connected to database');
+    migrateImages()
+})
+
+async function migrateImages() {
+  const users = await User.find({});
+  console.log(users);
+
+  for (const user of users) {
+    let updated = false;
+
+    // 更新 createdAlbums
+    user.createdAlbums.forEach(album => {
+      if (album.images) {
+        album.images.forEach(image => {
+          if (image.imageUrl?.startsWith('http://')) {
+            image.imageUrl = image.imageUrl.replace('http://', 'https://');
+            updated = true;
+          }
+        });
+      }
+    });
+
+    // 更新 sharedAlbums
+    user.sharedAlbums.forEach(album => {
+      if (album.images) {
+        album.images.forEach(image => {
+          if (image.imageUrl?.startsWith('http://')) {
+            image.imageUrl = image.imageUrl.replace('http://', 'https://');
+            updated = true;
+          }
+        });
+      }
+    });
+
+    // 4. 保存更新
+    if (updated) {
+      await user.save();
+      console.log(`Updated user: ${user.openID}`);
+    }
   }
-  
-  const dateString = "2023/01/31/3/32";
-  const parsedDate = parseDate(dateString);
-  
-  console.log(parsedDate);
+
+  console.log('Migration completed!');
+  process.exit(0);
+}
