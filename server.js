@@ -23,7 +23,7 @@ async function main() {
         console.log('Connected to database');
         wxToken.refreshToken();
 
-        schedule.scheduleJob('0 */90 * * * *', () => {
+        schedule.scheduleJob('0 */30 * * * *', () => {
             wxToken.refreshToken();
         });
     })
