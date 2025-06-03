@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const wxToken = require("./utils/wxToken");
+const schedule = require('node-schedule');
 
 main()
 
@@ -20,7 +21,11 @@ async function main() {
     db.on('error', (error) => {console.log(error)})
     db.once('open', () => {
         console.log('Connected to database');
-        wxToken.refreshToken()
+        wxToken.refreshToken();
+
+        schedule.scheduleJob('0 */90 * * * *', () => {
+            wxToken.refreshToken();
+        });
     })
 
     app.use(express.json())
