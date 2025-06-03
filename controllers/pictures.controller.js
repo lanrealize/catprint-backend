@@ -36,6 +36,7 @@ async function getPictures(req, res) {
 }
 
 async function postPicture(req, res) {
+  const fullFilePath = req.filePath + '/' + req.fileName;
   try {
     const currentConfig = picgo.getConfig('picBed.qiniu');
 
@@ -45,7 +46,6 @@ async function postPicture(req, res) {
         path: `${req.params.openID}/${req.params.albumID}/`
       }
     });
-    const fullFilePath = req.filePath + '/' + req.fileName;
 
     // 安全检查
     const result = await contentCheck(fullFilePath);
@@ -59,7 +59,6 @@ async function postPicture(req, res) {
 
     const picgoRes = await picgo.upload([fullFilePath]);
     console.log(`Upload picture: ${picgoRes[0].imgUrl} via PicGo successfully.`);
-    await fsUtils.removeFile(fullFilePath) // TODO: move this after res
 
     const imageId = uuid.v1();
     const timestampArray = req.body.timeStamp.split('/')
@@ -92,6 +91,8 @@ async function postPicture(req, res) {
   } catch (e) {
     console.log("Post pictures failed", e);
     res.status(500).json({ message: e.message });
+  } finally {
+    await fsUtils.removeFile(fullFilePath)
   }
 }
 
