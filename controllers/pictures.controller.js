@@ -6,6 +6,7 @@ const picgo = new PicGo("./config.json");
 const fsUtils = require("../utils/utils");
 const picturesService = require("../services/pictures.service");
 const { contentCheck } = require('../utils/imageCheck');
+const wxToken = require("../utils/wxToken");
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -51,6 +52,9 @@ async function postPicture(req, res) {
     const result = await contentCheck(fullFilePath);
     if (result['errcode'] !== 0) {
       console.log(result);
+      if (result['errcode'] === 40001) {
+        wxToken.refreshToken();
+      }
       return res.status(500).json(result);
     }
 
