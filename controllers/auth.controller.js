@@ -19,7 +19,6 @@ function login(req, res) {
       const wxUser = { openID: session.openid };
       // const accessToken = jwt.sign(wxUser, process.env.ACCESS_TOKEN_SECRET)
       // console.log(`cteated access token successfully`)
-  
       User.findOne({ openID: wxUser.openID }).then((user) => {
         if (user == null) {
           try {

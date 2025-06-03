@@ -1,13 +1,11 @@
 const User = require("../models/users.model");
-const mongoose = require("mongoose");
-const getUserByID = require("./users.controller").getUserByID;
 const uuid = require("uuid");
 const path = require("path");
 const { PicGo } = require("picgo");
 const picgo = new PicGo("./config.json");
 const fsUtils = require("../utils/utils");
-const sd = require("silly-datetime");
 const picturesService = require("../services/pictures.service");
+const { contentCheck } = require('../utils/imageCheck');
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -18,7 +16,6 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const fileName =
       req.params.openID + "-" + Date.now() + path.extname(file.originalname);
-    console.log(fileName);
     req.fileName = fileName;
     cb(null, fileName);
   },
@@ -48,11 +45,21 @@ async function postPicture(req, res) {
         path: `${req.params.openID}/${req.params.albumID}/`
       }
     });
-
     const fullFilePath = req.filePath + '/' + req.fileName;
+
+    // 安全检查
+    const result = await contentCheck(fullFilePath);
+    if (result['errcode'] !== 0) {
+      if (result['errcode'] === 87014) {
+        return res.status(500).json({ message: 'Unallowed content' });
+      } else {
+        return res.status(500).json({ message: 'Security check failed' });
+      }
+    }
+
     const picgoRes = await picgo.upload([fullFilePath]);
     console.log(`Upload picture: ${picgoRes[0].imgUrl} via PicGo successfully.`);
-    const deletion = await fsUtils.removeFile(fullFilePath) // TODO: move this after res
+    await fsUtils.removeFile(fullFilePath) // TODO: move this after res
 
     const imageId = uuid.v1();
     const timestampArray = req.body.timeStamp.split('/')
@@ -83,7 +90,7 @@ async function postPicture(req, res) {
       res.json({id: imageId});
     }
   } catch (e) {
-    console.log("Post pictures failed");
+    console.log("Post pictures failed", e);
     res.status(500).json({ message: e.message });
   }
 }

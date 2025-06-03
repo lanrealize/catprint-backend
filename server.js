@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const wxToken = require("./utils/wxToken");
 
 main()
 
@@ -17,7 +18,10 @@ async function main() {
     })
     const db = mongoose.connection 
     db.on('error', (error) => {console.log(error)})
-    db.once('open', () => {console.log('Connected to database')})
+    db.once('open', () => {
+        console.log('Connected to database');
+        wxToken.refreshToken()
+    })
 
     app.use(express.json())
 
